@@ -1,135 +1,109 @@
 @import "tailwindcss";
 
-/* ── CONFIGURATION (Tailwind v4 Standard) ────────────────────────────────────── */
 @theme {
-  /* Keyframes */
-  @keyframes glow {
-    0%,
-    100% {
-      opacity: 0.5;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    50% {
-      opacity: 0.8;
-      transform: translate(-50%, -50%) scale(1.1);
-    }
-  }
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-20px);
-    }
-  }
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Animations */
-  --animate-glow: glow 8s ease-in-out infinite;
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-fade-up: fadeInUp 0.8s ease-out forwards;
-
-  /* Custom Colors */
+  /* Colors */
   --color-brand-violet: #8b5cf6;
+  --color-brand-violet-light: #a78bfa;
   --color-brand-cyan: #22d3ee;
+
+  --color-bg-primary: #050508;
+  --color-bg-secondary: #0a0a0f;
+  --color-bg-card: #0d0d14;
+
+  --color-text-primary: #f8f8ff;
+  --color-text-muted: #6b6b80;
 }
 
-/* ── DESIGN TOKENS ───────────────────────────────────────────────────────────── */
-:root {
-  --bg-primary: #050508;
-  --bg-secondary: #0a0a0f;
-  --bg-card: #0d0d14;
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
 
-  --violet: #8b5cf6;
-  --violet-light: #a78bfa;
-  --cyan: #22d3ee;
+  html {
+    scroll-behavior: smooth;
+  }
 
-  --text-primary: #f8f8ff;
-  --text-muted: #6b6b80;
+  body {
+    @apply bg-bg-primary text-text-primary antialiased overflow-x-hidden;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  section {
+    @apply relative w-full;
+  }
+
+  .container {
+    @apply mx-auto w-full px-5 sm:px-6 lg:px-8;
+    max-width: 1200px;
+  }
 }
 
-/* ── BASE STYLES ─────────────────────────────────────────────────────────────── */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@keyframes glow {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
 }
 
-html {
-  scroll-behavior: smooth;
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
-body {
-  /* Menggunakan hex langsung untuk menghindari error index pada v4 */
-  background-color: #050508;
-  color: #f8f8ff;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 4px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
-
-::-webkit-scrollbar-thumb {
-  background: #2a2a3a;
-  border-radius: 2px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #8b5cf6;
-}
-
-/* ── UTILITY CLASSES ─────────────────────────────────────────────────────────── */
 @layer utilities {
+  /* TEXT GRADIENTS */
   .text-gradient {
-    background: linear-gradient(135deg, #a78bfa 0%, #22d3ee 100%);
+    background: linear-gradient(135deg, #a78bfa, #22d3ee);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
 
   .text-gradient-violet {
-    background: linear-gradient(135deg, #c4b5fd 0%, #8b5cf6 100%);
+    background: linear-gradient(135deg, #c4b5fd, #8b5cf6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
 
+  /* GLASS SYSTEM */
   .glass-card {
+    @apply border rounded-2xl;
     background: rgba(13, 13, 20, 0.8);
-    border: 1px solid rgba(139, 92, 246, 0.15);
+    border-color: rgba(139, 92, 246, 0.15);
     backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
   }
 
   .glass-card-hover {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s ease;
   }
 
   .glass-card-hover:hover {
     border-color: rgba(139, 92, 246, 0.4);
-    background: rgba(20, 15, 35, 0.9);
     transform: translateY(-4px);
     box-shadow: 0 20px 60px rgba(139, 92, 246, 0.15);
   }
 
+  /* EFFECTS */
   .glow-violet {
     box-shadow:
       0 0 40px rgba(139, 92, 246, 0.3),
@@ -142,73 +116,65 @@ body {
       0 0 80px rgba(34, 211, 238, 0.1);
   }
 
-  .noise-overlay {
-    position: relative;
+  /* ANIMATIONS */
+  .animate-glow {
+    animation: glow 6s ease-in-out infinite;
   }
 
-  .noise-overlay::after {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-fade-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+}
+
+@layer components {
+  /* BUTTON SYSTEM */
+  .btn-primary {
+    @apply relative overflow-hidden rounded-2xl font-bold text-white transition-all;
+    background: linear-gradient(135deg, #7c3aed, #2563eb);
+  }
+
+  .btn-primary:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 40px rgba(124, 58, 237, 0.5);
+  }
+
+  .btn-primary::before {
     content: "";
-    position: fixed;
+    position: absolute;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.4;
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
 
+  .btn-primary:hover::before {
+    opacity: 1;
+  }
+
+  .btn-primary span {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* GRID BACKGROUND */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(139, 92, 246, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    background-position: center;
+  }
+
+  /* BORDER GRADIENT */
   .border-gradient {
     border: 1px solid transparent;
     background-clip: padding-box;
     background-image:
-      linear-gradient(var(--bg-card), var(--bg-card)),
+      linear-gradient(var(--color-bg-card), var(--color-bg-card)),
       linear-gradient(135deg, rgba(139, 92, 246, 0.4), rgba(34, 211, 238, 0.4));
-    background-origin: border-box;
   }
-}
-
-/* ── COMPONENTS & EFFECTS ────────────────────────────────────────────────────── */
-
-/* Grid background */
-.grid-bg {
-  background-image:
-    linear-gradient(rgba(139, 92, 246, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
-  background-size: 60px 60px;
-  background-position: center center;
-}
-
-/* CTA Button */
-.btn-primary {
-  background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.btn-primary::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.btn-primary:hover::before {
-  opacity: 1;
-}
-
-.btn-primary:hover {
-  transform: scale(1.03);
-  box-shadow: 0 10px 40px rgba(124, 58, 237, 0.5);
-}
-
-.btn-primary span {
-  position: relative;
-  z-index: 1;
-}
-
-/* Section transitions */
-section {
-  position: relative;
 }
