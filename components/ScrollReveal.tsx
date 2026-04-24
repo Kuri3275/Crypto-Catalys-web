@@ -1,66 +1,52 @@
 "use client";
 
-import { useEffect, useRef, ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface ScrollRevealProps {
-  children: ReactNode;
-  className?: string;
-  delay?: number;
-  direction?: "up" | "down" | "left" | "right" | "none";
-  duration?: number;
+  children: React.ReactNode;
+  delay?: number; // dalam milidetik
+  width?: "fit-content" | "100%";
 }
 
 export default function ScrollReveal({
   children,
-  className = "",
   delay = 0,
-  direction = "up",
-  duration = 700,
+  width = "100%",
 }: ScrollRevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    // Mapping arah animasi ke transform awal
-    const directions = {
-      up: "translateY(40px)",
-      down: "translateY(-40px)",
-      left: "translateX(40px)",
-      right: "translateX(-40px)",
-      none: "translate(0)",
-    };
-
-    // Setup style awal secara programmatik sebelum observasi dimulai
-    el.style.opacity = "0";
-    el.style.transform = directions[direction];
-    el.style.transition = `opacity ${duration}ms cubic-bezier(0.2, 0, 0.2, 1), transform ${duration}ms cubic-bezier(0.2, 0, 0.2, 1)`;
-    el.style.transitionDelay = `${delay}ms`;
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // Menjalankan animasi
-          requestAnimationFrame(() => {
-            el.style.opacity = "1";
-            el.style.transform = "translate(0)";
-          });
-          observer.unobserve(el);
+          setIsVisible(true);
+          // Sekali muncul, stop observe biar performa enteng
+          if (ref.current) observer.unobserve(ref.current);
         }
       },
       {
-        threshold: 0.15, // Muncul sedikit lebih lambat agar transisi terasa pas
-        rootMargin: "0px 0px -50px 0px", // Trigger sedikit sebelum elemen benar-benar masuk viewport
+        threshold: 0.15, // Muncul setelah 15% elemen masuk layar
       },
     );
 
-    observer.observe(el);
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
     return () => observer.disconnect();
-  }, [delay, direction, duration]);
+  }, []);
 
   return (
-    <div ref={ref} className={`will-change-transform ${className}`}>
+    <div
+      ref={ref}
+      style={{
+        width,
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "translateY(0)" : "translateY(20px)",
+        transition: `all 0.8s cubic-bezier(0.21, 1.02, 0.73, 1) ${delay}ms`,
+      }}
+    >
       {children}
     </div>
   );
