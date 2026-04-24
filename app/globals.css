@@ -1,18 +1,64 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
+/* ── CONFIGURATION (Tailwind v4 Standard) ────────────────────────────────────── */
+@theme {
+  /* Keyframes */
+  @keyframes glow {
+    0%,
+    100% {
+      opacity: 0.5;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Animations */
+  --animate-glow: glow 8s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-fade-up: fadeInUp 0.8s ease-out forwards;
+
+  /* Custom Colors */
+  --color-brand-violet: #8b5cf6;
+  --color-brand-cyan: #22d3ee;
+}
+
+/* ── DESIGN TOKENS ───────────────────────────────────────────────────────────── */
 :root {
   --bg-primary: #050508;
   --bg-secondary: #0a0a0f;
   --bg-card: #0d0d14;
+
   --violet: #8b5cf6;
   --violet-light: #a78bfa;
   --cyan: #22d3ee;
+
   --text-primary: #f8f8ff;
   --text-muted: #6b6b80;
 }
 
+/* ── BASE STYLES ─────────────────────────────────────────────────────────────── */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -24,11 +70,11 @@ html {
 }
 
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  /* Menggunakan hex langsung untuk menghindari error index pada v4 */
+  background-color: #050508;
+  color: #f8f8ff;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
@@ -50,7 +96,7 @@ body {
   background: #8b5cf6;
 }
 
-/* Utility classes */
+/* ── UTILITY CLASSES ─────────────────────────────────────────────────────────── */
 @layer utilities {
   .text-gradient {
     background: linear-gradient(135deg, #a78bfa 0%, #22d3ee 100%);
@@ -74,7 +120,7 @@ body {
   }
 
   .glass-card-hover {
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .glass-card-hover:hover {
@@ -85,12 +131,14 @@ body {
   }
 
   .glow-violet {
-    box-shadow: 0 0 40px rgba(139, 92, 246, 0.3),
+    box-shadow:
+      0 0 40px rgba(139, 92, 246, 0.3),
       0 0 80px rgba(139, 92, 246, 0.1);
   }
 
   .glow-cyan {
-    box-shadow: 0 0 40px rgba(34, 211, 238, 0.3),
+    box-shadow:
+      0 0 40px rgba(34, 211, 238, 0.3),
       0 0 80px rgba(34, 211, 238, 0.1);
   }
 
@@ -108,34 +156,25 @@ body {
     opacity: 0.4;
   }
 
-  .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .animate-on-scroll.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
   .border-gradient {
     border: 1px solid transparent;
     background-clip: padding-box;
-    background-image: linear-gradient(var(--bg-card), var(--bg-card)),
+    background-image:
+      linear-gradient(var(--bg-card), var(--bg-card)),
       linear-gradient(135deg, rgba(139, 92, 246, 0.4), rgba(34, 211, 238, 0.4));
     background-origin: border-box;
   }
 }
 
+/* ── COMPONENTS & EFFECTS ────────────────────────────────────────────────────── */
+
 /* Grid background */
 .grid-bg {
-  background-image: linear-gradient(
-      rgba(139, 92, 246, 0.03) 1px,
-      transparent 1px
-    ),
-    linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
+  background-image:
+    linear-gradient(rgba(139, 92, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  background-position: center center;
 }
 
 /* CTA Button */
