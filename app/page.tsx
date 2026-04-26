@@ -116,43 +116,44 @@ const roadmap = [
 
 const testimonials = [
   {
-    image: "/images/proof1.jpg",
+    image: "/images/testi1.jpeg",
     quote: "Entry sekarang lebih jelas, ga asal ikut sinyal.",
-    name: "Andi",
+    name: "",
   },
   {
-    image: "/images/proof2.jpg",
+    image: "/images/testi2.jpeg",
     quote: "Akhirnya ngerti kenapa ambil posisi.",
-    name: "Rizky",
+    name: "",
   },
   {
-    image: "/images/proof3.jpg",
+    image: "/images/testi3.jpeg",
     quote: "Lebih tenang, ga panik tiap market gerak.",
-    name: "Fajar",
+    name: "",
   },
 ];
 
 const faqs = [
   {
-    question: "Apakah ini cocok untuk orang yang benar-benar baru?",
+    question: "Apakah ini cocok untuk pemula yang belum paham crypto?",
     answer:
-      "Ya. Program ini dibuat untuk pemula yang butuh alur belajar jelas, bukan asumsi bahwa peserta sudah paham chart atau istilah crypto.",
+      "Iya. Program ini memang dirancang untuk pemula dari nol. Kamu tidak perlu punya background trading atau ngerti chart sebelumnya, karena semuanya dijelaskan step-by-step sampai kamu paham cara melihat market dengan lebih jelas.",
   },
   {
-    question: "Apakah ini kelas sinyal atau grup call?",
+    question: "Apakah ini grup signal atau tempat copy trade?",
     answer:
-      "Bukan. Fokus utamanya adalah membangun cara berpikir, membaca market, dan menyiapkan keputusan secara mandiri.",
+      "Bukan. Fokus utama di sini adalah membangun cara berpikir dan framework kamu sendiri. Tujuannya supaya kamu tidak lagi bergantung pada call orang lain dan bisa mengambil keputusan secara mandiri.",
   },
   {
-    question: "Seberapa intens programnya?",
+    question: "Apakah materinya bisa diikuti sambil kerja atau kuliah?",
     answer:
-      "Dirancang supaya realistis untuk dijalani sambil kerja atau kuliah, dengan ritme materi, live review, dan evaluasi mingguan.",
+      "Bisa. Materi disusun supaya fleksibel dan realistis untuk dijalani di tengah kesibukan. Kamu bisa belajar dengan ritme sendiri tanpa harus online setiap waktu.",
   },
   {
-    question: "Kenapa seat dibatasi?",
+    question: "Apa yang membuat ini berbeda dari konten crypto gratis di luar sana?",
     answer:
-      "Karena nilai utamanya ada di review dan kedalaman diskusi. Cohort kecil menjaga pengalaman tetap terasa fokus dan relevan.",
+      "Perbedaannya ada di struktur dan sistemnya. Di luar sana kamu dapat informasi, tapi di sini kamu membangun cara berpikir, proses entry, dan sistem review yang bisa kamu pakai berulang kali.",
   },
+  
 ];
 
 function SectionHeading({
@@ -218,10 +219,10 @@ export default function Home() {
 
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <a href="https://discord.gg/zmauuhKvuW" className="button-primary">
-                  Join sekarang
+                  Join Free Discord 
                 </a>
-                <a href="#experience" className="button-secondary">
-                  Explore the experience
+                <a href="#materi" className="button-secondary">
+                  Explore
                 </a>
               </div>
 
@@ -460,7 +461,7 @@ export default function Home() {
         </ScrollReveal>
       </section>
 
-      <section className="section-shell py-24 ">
+      <section id="eksklusif" className="section-shell py-24 ">
         <div className="container grid gap-6 lg:grid-cols-[1.05fr_0.95fr] items-stretch">
           <ScrollReveal delay={120}>
             <div className="cta-vault rounded-[2rem] p-7 md:p-8">
@@ -533,31 +534,15 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="testimoni" className="section-shell py-24">
-        <div className="container">
-          <ScrollReveal>
-            <SectionHeading
-              label="Testimoni"
-              title="Yang berubah bukan cuma pengetahuan, tapi cara mereka ambil keputusan."
-              description="Mereka bukan trader profesional. Tapi setelah punya sistem yang jelas, cara mereka melihat market berubah total."
-            />
-          </ScrollReveal>
-
-          <div className="mt-12 flex justify-center ">
-            <ScrollReveal>
-              <TestimonialSlider testimonials={testimonials} />
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
+      
 
       <section id="faq" className="section-shell py-24">
         <div className="container grid gap-12 lg:grid-cols-[0.94fr_1.06fr]">
           <ScrollReveal>
             <SectionHeading
               label="FAQs"
-              title="The last objections should feel resolved before the final CTA appears."
-              description="This keeps the conversion flow clean and gives more cautious visitors enough confidence to keep going."
+              title="Masih ada yang kamu pertimbangkan?"
+              description="Kami rangkum jawaban yang paling penting supaya kamu bisa melihat gambaran secara lebih jelas."
             />
           </ScrollReveal>
 
@@ -586,31 +571,27 @@ export default function Home() {
                 <div>
                   <span className="section-kicker">Final call</span>
                   <h2 className="mt-5 max-w-3xl text-3xl font-semibold leading-tight text-white md:text-5xl">
-                    Upgrade from crypto confusion to a premium learning system
-                    built for calm conviction.
+                    Saatnya berhenti bingung dan mulai paham market dengan jelas
                   </h2>
                   <p className="mt-5 max-w-2xl text-sm leading-7 text-white/66 md:text-base">
-                    Enter the next CryptoCatalys cohort and build your own
-                    market framework, review ritual, and execution discipline in
-                    a small-group environment designed to convert uncertainty
-                    into clarity.
+                    Akses sistem belajar yang dirancang untuk membantu kamu membaca market dengan lebih tenang, terarah, dan bisa dipraktekkan langsung.
                   </p>
                   <div className="mt-6 flex flex-wrap gap-3 text-sm text-white/56">
-                    <span className="data-chip">12-seat intake</span>
-                    <span className="data-chip">Premium support</span>
-                    <span className="data-chip">Replay included</span>
+                    <span className="data-chip">Akses langsung ke materi</span>
+                    <span className="data-chip">Belajar tanpa bergantung pada signal</span>
+                    <span className="data-chip">Bisa dipelajari ulang kapan saja</span>
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-4 sm:flex-row lg:flex-col">
-                  <a href="#" className="button-primary text-center">
-                    Apply for access
+                  <a href="#eksklusif" className="button-primary text-center">
+                    Dapatkan akses sekarang
                   </a>
                   <a
-                    href="#experience"
+                    href="#testimoni"
                     className="button-secondary text-center"
                   >
-                    Revisit the offer
+                    Lihat Testimoni
                   </a>
                 </div>
               </div>
@@ -619,24 +600,25 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="mobile-cta-bar md:hidden">
-        <div className="mobile-cta-shell mx-auto flex w-full max-w-6xl items-center gap-3 rounded-[1.5rem] px-4 py-3">
-          <div className="min-w-0 flex-1">
-            <p className="text-xs uppercase tracking-[0.18em] text-white/42">
-              Next cohort
-            </p>
-            <p className="truncate text-sm font-medium text-white">
-              Premium Web3 learning, limited seats
-            </p>
+      <section id="testimoni" className="section-shell py-24">
+        <div className="container">
+          <ScrollReveal>
+            <SectionHeading
+              label="Testimoni"
+              title="Yang berubah bukan cuma pengetahuan, tapi cara mereka ambil keputusan."
+              description="Mereka bukan trader profesional. Tapi setelah punya sistem yang jelas, cara mereka melihat market berubah total."
+            />
+          </ScrollReveal>
+
+          <div className="mt-12 flex justify-center ">
+            <ScrollReveal>
+              <TestimonialSlider testimonials={testimonials} />
+            </ScrollReveal>
           </div>
-          <a
-            href="#daftar"
-            className="button-primary shrink-0 px-5 py-3 text-sm"
-          >
-            Apply
-          </a>
         </div>
-      </div>
+      </section>
+
+      
     </main>
   );
 }
