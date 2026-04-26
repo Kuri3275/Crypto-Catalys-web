@@ -1,129 +1,135 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
+const navLinks = [
+  { name: "Experience", href: "#experience" },
+  { name: "Materi", href: "#materi" },
+  { name: "Proof", href: "#testimoni" },
+  { name: "FAQ", href: "#faq" },
+];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
+    function handleScroll() {
+      setIsScrolled(window.scrollY > 16);
+    }
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: "Materi", href: "#materi" },
-    { name: "Cara Kerja", href: "#cara-kerja" },
-    { name: "Testimoni", href: "#testimoni" },
-    { name: "FAQ", href: "#faq" },
-  ];
-
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 w-full flex justify-center ${
-        isScrolled ? "py-3 md:py-4" : "py-6 md:py-8"
-      }`}
-    >
-      {/* Container utama: Pakai w-[90%] agar tidak mepet pinggir saat scale 150% */}
+    <nav className="pointer-events-none fixed inset-x-0 top-0 z-[100] flex justify-center px-4 pt-4 md:px-6 md:pt-6">
       <div
-        className={`w-[92%] max-w-6xl flex items-center justify-between px-5 md:px-8 py-3 rounded-2xl border transition-all duration-500 ${
+        className={`pointer-events-auto w-full max-w-6xl rounded-[1.75rem] border transition-all duration-300 ${
           isScrolled
-            ? "glass-card border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-xl"
-            : "bg-transparent border-transparent"
+            ? "border-[#67e8f9]/12 bg-[rgba(6,12,24,0.78)] shadow-[0_22px_70px_rgba(0,0,0,0.34)] backdrop-blur-2xl"
+            : "border-white/8 bg-[rgba(6,12,24,0.36)] backdrop-blur-xl"
         }`}
       >
-        {/* ── LEFT: BRAND LOGO ── */}
-        <div className="flex-1 flex justify-start">
-          <a href="#" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-xl bg-brand-violet flex items-center justify-center glow-violet group-hover:rotate-12 transition-all duration-300">
+        <div className="flex items-center justify-between px-4 py-3 md:px-6">
+          <a href="#" className="flex items-center gap-3">
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#67e8f9]/16 bg-[linear-gradient(145deg,rgba(103,232,249,0.24),rgba(129,140,248,0.16))] shadow-[0_12px_34px_rgba(96,165,250,0.16)]">
               <svg
-                width="20"
-                height="20"
+                width="18"
+                height="18"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="white"
-                strokeWidth="2.5"
+                stroke="currentColor"
+                strokeWidth="1.8"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                className="text-white"
               >
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                <path d="M4 15l4-4 4 4 8-8" />
+                <path d="M20 7v6h-6" />
               </svg>
             </div>
-            <span className="font-bold text-lg md:text-xl tracking-tight text-white">
-              Crypto<span className="text-brand-cyan">Mastery</span>
-            </span>
-          </a>
-        </div>
-
-        {/* ── CENTER: DESKTOP NAV (Hidden on Mobile) ── */}
-        <div className="hidden lg:flex items-center gap-1 bg-white/[0.03] border border-white/5 rounded-full p-1 backdrop-blur-md">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="px-5 py-2 text-sm font-medium text-white/60 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300"
-            >
-              {link.name}
-            </a>
-          ))}
-        </div>
-
-        {/* ── RIGHT: CTA & MOBILE TOGGLE ── */}
-        <div className="flex-1 flex justify-end items-center gap-4">
-          <a
-            href="#daftar"
-            className="hidden md:flex btn-primary px-7 py-2.5 rounded-xl text-sm font-bold text-white shadow-lg shadow-brand-violet/20"
-          >
-            <span>Mulai Sekarang</span>
-          </a>
-
-          {/* Hamburger Menu */}
-          <button
-            className="lg:hidden text-white p-2 hover:bg-white/5 rounded-lg transition-colors"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle Menu"
-          >
-            <div className="w-6 h-5 relative flex flex-col justify-between">
-              <span
-                className={`w-full h-0.5 bg-white rounded-full transition-all duration-300 ${isMobileMenuOpen ? "rotate-45 translate-y-2.5" : ""}`}
-              />
-              <span
-                className={`w-full h-0.5 bg-white rounded-full transition-all duration-300 ${isMobileMenuOpen ? "opacity-0 scale-x-0" : ""}`}
-              />
-              <span
-                className={`w-full h-0.5 bg-white rounded-full transition-all duration-300 ${isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`}
-              />
+            <div>
+              <p className="text-sm uppercase tracking-[0.24em] text-white/35">
+                Crypto
+              </p>
+              <p className="text-base font-semibold tracking-tight text-white md:text-lg">
+                Catalys
+              </p>
             </div>
-          </button>
-        </div>
-      </div>
-
-      {/* ── MOBILE MENU DROPDOWN ── */}
-      <div
-        className={`lg:hidden absolute top-full left-[4%] right-[4%] mt-3 glass-card rounded-2xl border border-white/10 overflow-hidden transition-all duration-500 origin-top ${
-          isMobileMenuOpen
-            ? "opacity-100 scale-y-100"
-            : "opacity-0 scale-y-0 pointer-events-none"
-        }`}
-      >
-        <div className="p-6 flex flex-col gap-4 bg-[#0a0a0f]/95 backdrop-blur-2xl">
-          {navLinks.map((link, i) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-white/70 hover:text-brand-cyan text-lg font-medium transition-colors py-2 border-b border-white/5"
-              onClick={() => setIsMobileMenuOpen(false)}
-              style={{ transitionDelay: `${i * 50}ms` }}
-            >
-              {link.name}
-            </a>
-          ))}
-          <a className="btn-primary py-4 rounded-xl text-center font-bold text-white mt-2">
-            <span>Gabung Sekarang</span>
           </a>
+
+          <div className="hidden items-center gap-2 rounded-full border border-white/8 bg-white/[0.03] p-1 lg:flex">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="rounded-full px-4 py-2 text-sm text-white/58 transition-colors duration-200 hover:bg-white/8 hover:text-white"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-3">
+            <a href="https://discord.gg/zmauuhKvuW" className="button-primary hidden md:inline-flex">
+              Join Sekarang
+            </a>
+            <button
+              type="button"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white lg:hidden"
+              aria-label="Toggle menu"
+              onClick={() => setIsMobileMenuOpen((current) => !current)}
+            >
+              <div className="flex h-4 w-5 flex-col justify-between">
+                <span
+                  className={`h-0.5 rounded-full bg-current transition ${
+                    isMobileMenuOpen ? "translate-y-[7px] rotate-45" : ""
+                  }`}
+                />
+                <span
+                  className={`h-0.5 rounded-full bg-current transition ${
+                    isMobileMenuOpen ? "opacity-0" : ""
+                  }`}
+                />
+                <span
+                  className={`h-0.5 rounded-full bg-current transition ${
+                    isMobileMenuOpen ? "-translate-y-[7px] -rotate-45" : ""
+                  }`}
+                />
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <div
+          className={`overflow-hidden px-4 transition-[max-height,opacity,padding] duration-300 lg:hidden ${
+            isMobileMenuOpen
+              ? "max-h-96 pb-4 opacity-100"
+              : "max-h-0 pb-0 opacity-0"
+          }`}
+        >
+          <div className="space-y-2 rounded-[1.5rem] border border-white/8 bg-[rgba(8,14,26,0.84)] p-3 backdrop-blur-2xl">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="block rounded-2xl px-4 py-3 text-sm text-white/68 transition-colors hover:bg-white/6 hover:text-white"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.name}
+              </a>
+            ))}
+            <a
+              href="#daftar"
+              className="button-primary mt-2 flex justify-center"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Apply now
+            </a>
+          </div>
         </div>
       </div>
     </nav>
