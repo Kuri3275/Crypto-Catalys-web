@@ -10,6 +10,8 @@ interface SectionHeadingProps {
   align?: "left" | "center";
 }
 
+
+
 const marketStats = [
   { value: "100+", label: "Materi video & ebook terstruktur" },
   { value: "06", label: "week guided sprint" },
